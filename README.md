@@ -1,61 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# API de Simulação de Empréstimos
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Bem-vindo à **API de Simulação de Empréstimos**! 🎉 Essa é uma API REST feita com PHP e Laravel para ajudar a simular empréstimos de forma prática. Com ela, você pode listar instituições financeiras, convênios (como INSS ou Siape) e fazer simulações de empréstimo informando o valor desejado, número de parcelas e, se quiser, filtrar por instituições ou convênios. Tudo isso usando arquivos JSON, sem precisar de banco de dados.
 
-## About Laravel
+## O que essa API faz?
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Lista instituições**: Mostra as instituições disponíveis (ex.: Pan, Bmg, Ole).
+-   **Lista convênios**: Exibe os convênios disponíveis (ex.: INSS, Federal, Siape).
+-   **Simula empréstimos**: Calcula o valor das parcelas com base no valor solicitado e em coeficientes pré-definidos.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Pré-requisitos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Essa aplicação foi constrída usando os seguintes requisitos:
 
-## Learning Laravel
+-   PHP 8.4
+-   Composer (para instalar dependências)
+-   Laravel 12
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Como instalar
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **Baixe o projeto**:
+   Clone o repositório do GitHub:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    ```bash
+    git clone https://github.com/charlescleyton/empresta_api.git
+    cd empresta_api
+    ```
 
-## Laravel Sponsors
+2. **Instale as dependências**:
+   Use o Composer para instalar tudo que a API precisa:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    ```bash
+    composer install
+    ```
 
-### Premium Partners
+3. **Configure o ambiente**:
+   Dê permissão à pasta `storage`:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+    ```bash
+    php artisan storage:link
+    ```
 
-## Contributing
+4. **Adicione os arquivos JSON**:
+   Coloque os arquivos `instituicoes.json`, `convenios.json` e `taxas_instituicoes.json` na pasta `storage/app`. Eles contêm os dados que a API usa.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. **Rode a API**:
+   Inicie o servidor de desenvolvimento:
+    ```bash
+    php artisan serve
+    ```
+    A API estará disponível em `http://localhost:8000`.
 
-## Code of Conduct
+## Como usar a API
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+A API tem três endpoints principais. Você pode testá-los usando ferramentas como Postman ou Insomnia.
 
-## Security Vulnerabilities
+### 1. Listar Instituições
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+-   **Endpoint**: `GET /api/instituicoes`
+-   **O que faz**: Mostra todas as instituições financeiras disponíveis.
+-   **Exemplo de resposta**:
+    ```json
+    {
+        "chave": "PAN",
+        "valor": "Pan"
+    },
+    {
+        "chave": "OLE",
+        "valor": "Ole"
+    },
+    {
+        "chave": "BMG",
+        "valor": "Bmg"
+    }
+    ```
 
-## License
+### 2. Listar Convênios
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   **Endpoint**: `GET /api/convenios`
+-   **O que faz**: Exibe todos os convênios disponíveis.
+-   **Exemplo de resposta**:
+    ```json
+    {
+        "chave": "INSS",
+        "valor": "INSS"
+    },
+    {
+        "chave": "FEDERAL",
+        "valor": "Federal"
+    },
+    {
+        "chave": "SIAPE",
+        "valor": "Siape"
+    }
+    ```
+
+### 3. Simular Empréstimo
+
+-   **Endpoint**: `POST /api/simulacao`
+-   **O que faz**: Faz uma simulação de empréstimo com base nos dados enviados.
+-   **Exemplo de requisição**:
+    ```json
+    {
+        "valor": 10000,
+        "instituicoes": ["BMG", "PAN"],
+        "convenios": ["INSS"],
+        "parcela": 72
+    }
+    ```
+    -   **Exemplo de resposta**:
+    ```json
+    "BMG": [
+        {
+            "taxa": 2.05,
+            "parcelas": 72,
+            "valor_parcela": 260.4,
+            "convenio": "INSS"
+        }
+    ],
+    "PAN": [
+        {
+            "taxa": 2.08,
+            "parcelas": 72,
+            "valor_parcela": 284.3,
+            "convenio": "INSS"
+        }
+    ]
+    ```
+
+## Como testar manualmente
+
+1. Use o arquivo Empresta_api.postman_collection na raís do projeto para chamar os endpoints.
+2. Experimente os exemplos acima.
+3. Caso envie dados inválidos (ex.: `valor_emprestimo` negativo), a API vai retornar um erro com uma mensagem explicando o problema.
+
+## Como fazer os testes
+
+1. Execute o comando abaixo para rodar os testes.
+
+```bash
+    php artisan test
+```
+
+2. Os testes verificam se a API está funcionando corretamente, incluindo casos de erro.
+
+## Como funciona o cálculo?
+
+O valor da parcela é calculado assim:
+
+```
+valor_parcela = valor_emprestimo * coeficiente
+```
+
+O `coeficiente` vem do arquivo `taxas_instituicoes.json` e depende da instituição, convênio e número de parcelas. A API filtra os resultados com base nos parâmetros que você enviar (instituições, convênios ou parcelas). Se você não passar filtros, ela mostra todas as opções possíveis.
+
+## Observações
+
+-   A API usa arquivos JSON em vez de banco de dados, então mantenha os arquivos `instituicoes.json`, `convenios.json` e `taxas_instituicoes.json` na pasta `storage/app`.
+-   O código foi organizado para ser fácil de entender e manter, usando boas práticas do Laravel.
+-   Para projetos com muitos acessos, considere usar cache para os dados dos JSON.
+-   Se for enviar o projeto para avaliação, inclua o link do repositório GitHub e uma coleção do Postman.
+
+## Problemas ou dúvidas?
+
+Se algo der errado ou você precisar de ajuda, abra uma issue no repositório ou entre em contato pelo canal indicado. Vamos resolver juntos! 😊
+
+---
+
+**Feito com 💻 e ☕ por Charles Pereira!**
