@@ -33,10 +33,7 @@ Essa aplicação foi constrída usando os seguintes requisitos:
     composer install
     ```
 
-3. **Adicione os arquivos JSON**:
-   Coloque os arquivos `instituicoes.json`, `convenios.json` e `taxas_instituicoes.json` na pasta `storage/app`. Eles contêm os dados que a API usa.
-
-4. **Rode a API**:
+3. **Rode a API**:
    Inicie o servidor de desenvolvimento:
     ```bash
     php artisan serve
