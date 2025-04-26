@@ -2,25 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SimulationRequest;
+use App\Services\SimulationService;
 
 class SimulationController extends Controller
 {
+
+    protected $simulationService;
+
+    public function __construct(SimulationService $simulationService)
+    {
+        $this->simulationService = $simulationService;
+    }
+
     public function getInstitutions()
     {
-        $instituicaoJson = json_decode(Storage::get('instituicoes.json', true));
-        return $this->getData($instituicaoJson);
+        return response()->json($this->simulationService->getInstitutions());
     }
 
     public function getAgreements()
     {
-        $conveniosJson = json_decode(Storage::get('convenios.json', true));
-        return $this->getData($conveniosJson);
+        return response()->json($this->simulationService->getAgreements());
     }
 
-    private function getData($request){
+    public function simulate(SimulationRequest $request)
+    {
+        $validated = $request->validated();
 
-        return collect($request)->select('chave', 'valor');
-    }
+        $service = $this->simulationService->Simulate(
+            $validated['valor'],
+            $validated['instituicoes'] ?? null,
+            $validated['convenios'] ?? null,
+            $validated['parcela'] ?? null);
+
+            return response()->json(data: $service);
+        }
+
+
 
 }
