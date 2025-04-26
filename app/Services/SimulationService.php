@@ -12,9 +12,9 @@ class SimulationService
 
     public function __construct()
     {
-        $this->institutions = json_decode(Storage::get('instituicoes.json'), true);
-        $this->agreements = json_decode(Storage::get('convenios.json'), true);
-        $this->taxas = json_decode(Storage::get('taxas_instituicoes.json'), true);
+        $this->institutions = json_decode(file_get_contents(base_path('instituicoes.json')), true);
+        $this->agreements = json_decode(file_get_contents(base_path('convenios.json')), true);
+        $this->taxas = json_decode(file_get_contents(base_path('taxas_instituicoes.json')), true);
     }
 
     public function getInstitutions()
