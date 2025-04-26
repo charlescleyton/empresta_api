@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "651f3c26-185e-41e5-b881-b1f5fbcbc2ba",
+		"name": "Empresta_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23202572"
+	},
+	"item": [
+		{
+			"name": "Intituições",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{localhost}}api/instituicoes"
+			},
+			"response": []
+		},
+		{
+			"name": "Convênios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{localhost}}api/convenios"
+			},
+			"response": []
+		},
+		{
+			"name": "Simulação com parcela",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"valor\": 15000,\r\n  \"instituicoes\": [\"BMG\"],\r\n  \"convenios\": [\"INSS\"],\r\n  \"parcela\": 48\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{localhost}}api/simular"
+			},
+			"response": []
+		},
+		{
+			"name": "Simulação sem parcela definida",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"valor\": 10000,\r\n  \"instituicoes\": [\"BMG\"],\r\n  \"convenios\": [\"INSS\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{localhost}}api/simular"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "http://127.0.0.1:8000/",
+			"type": "string"
+		}
+	]
+}
