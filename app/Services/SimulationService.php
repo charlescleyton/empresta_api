@@ -6,25 +6,25 @@ use Illuminate\Support\Facades\Storage;
 
 class SimulationService
 {
-    protected $institutions;
-    protected $agreements;
+    protected $instituicoes;
+    protected $convenios;
     protected $taxas;
 
     public function __construct()
     {
-        $this->institutions = json_decode(file_get_contents(base_path('instituicoes.json')), true);
-        $this->agreements = json_decode(file_get_contents(base_path('convenios.json')), true);
+        $this->instituicoes = json_decode(file_get_contents(base_path('instituicoes.json')), true);
+        $this->convenios = json_decode(file_get_contents(base_path('convenios.json')), true);
         $this->taxas = json_decode(file_get_contents(base_path('taxas_instituicoes.json')), true);
     }
 
-    public function getInstitutions()
+    public function getInstituicoes()
     {
-        return collect($this->institutions)->select('chave', 'valor')->toArray();
+        return collect($this->instituicoes)->select('chave', 'valor')->toArray();
     }
 
-    public function getAgreements()
+    public function getConvenios()
     {
-        return collect($this->agreements)->select('chave', 'valor')->toArray();
+        return collect(value: $this->convenios)->select('chave', 'valor')->toArray();
     }
 
     public function getData($request)

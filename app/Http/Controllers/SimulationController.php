@@ -15,14 +15,14 @@ class SimulationController extends Controller
         $this->simulationService = $simulationService;
     }
 
-    public function getInstitutions()
+    public function getInstituicoes()
     {
-        return response()->json($this->simulationService->getInstitutions());
+        return response()->json($this->simulationService->getInstituicoes());
     }
 
-    public function getAgreements()
+    public function getConvenios()
     {
-        return response()->json($this->simulationService->getAgreements());
+        return response()->json($this->simulationService->getConvenios());
     }
 
     public function simulate(SimulationRequest $request)
