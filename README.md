@@ -121,7 +121,7 @@ A API tem três endpoints principais. Você pode testá-los usando ferramentas c
 
 1. Use o arquivo Empresta_api.postman_collection na raís do projeto para chamar os endpoints.
 2. Experimente os exemplos acima.
-3. Caso envie dados inválidos (ex.: `valor_emprestimo` negativo), a API vai retornar um erro com uma mensagem explicando o problema.
+3. Caso envie dados inválidos (ex.: `valor` negativo), a API vai retornar um erro com uma mensagem explicando o problema.
 
 ## Como fazer os testes
 
@@ -138,7 +138,7 @@ A API tem três endpoints principais. Você pode testá-los usando ferramentas c
 O valor da parcela é calculado assim:
 
 ```
-valor_parcela = valor_emprestimo * coeficiente
+valor_parcela = valor * coeficiente
 ```
 
 O `coeficiente` vem do arquivo `taxas_instituicoes.json` e depende da instituição, convênio e número de parcelas. A API filtra os resultados com base nos parâmetros que você enviar (instituições, convênios ou parcelas). Se você não passar filtros, ela mostra todas as opções possíveis.
