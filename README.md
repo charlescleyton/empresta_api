@@ -143,13 +143,6 @@ valor_parcela = valor * coeficiente
 
 O `coeficiente` vem do arquivo `taxas_instituicoes.json` e depende da instituição, convênio e número de parcelas. A API filtra os resultados com base nos parâmetros que você enviar (instituições, convênios ou parcelas). Se você não passar filtros, ela mostra todas as opções possíveis.
 
-## Observações
-
--   A API usa arquivos JSON em vez de banco de dados, então mantenha os arquivos `instituicoes.json`, `convenios.json` e `taxas_instituicoes.json` na pasta `storage/app`.
--   O código foi organizado para ser fácil de entender e manter, usando boas práticas do Laravel.
--   Para projetos com muitos acessos, considere usar cache para os dados dos JSON.
--   Se for enviar o projeto para avaliação, inclua o link do repositório GitHub e uma coleção do Postman.
-
 ## Problemas ou dúvidas?
 
 Se algo der errado ou você precisar de ajuda, abra uma issue no repositório ou entre em contato pelo canal indicado. Vamos resolver juntos! 😊
